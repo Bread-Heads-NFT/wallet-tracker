@@ -41,20 +41,24 @@ async function main() {
     console.log(instances);
     console.log(instances.length);
 
-    let ids = [];
     for (let instance of instances) {
-        if (instance.account.entries === 1) {
-            ids.push(instance.account.identifier.toString());
-        } else if (instance.account.entries === 2) {
-            ids.push(instance.account.identifier.toString());
-            ids.push(instance.account.identifier.toString());
-        }
+        await close(program, instance.publicKey, authority);
     }
-    console.log(ids);
-    console.log(ids.length);
 
-    let winner = ids[Math.floor(Math.random() * ids.length)];
-    console.log(winner);
+    // let ids = [];
+    // for (let instance of instances) {
+    //     if (instance.account.entries === 1) {
+    //         ids.push(instance.account.identifier.toString());
+    //     } else if (instance.account.entries === 2) {
+    //         ids.push(instance.account.identifier.toString());
+    //         ids.push(instance.account.identifier.toString());
+    //     }
+    // }
+    // console.log(ids);
+    // console.log(ids.length);
+
+    // let winner = ids[Math.floor(Math.random() * ids.length)];
+    // console.log(winner);
 }
 
 
