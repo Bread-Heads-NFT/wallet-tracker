@@ -5,7 +5,7 @@ use crate::{Record, WalletTrackerError};
 #[derive(Accounts)]
 #[instruction(wallet: Pubkey)]
 pub struct Initialize<'info> {
-    #[account(init, payer = authority, space = 8 + 32 + 32 + 1 + 1, seeds = [b"record".as_ref(), authority.key.as_ref(), wallet.as_ref()], bump)]
+    #[account(init, payer = authority, space = Record::len(), seeds = [b"record".as_ref(), authority.key.as_ref(), wallet.as_ref()], bump)]
     pub record: Account<'info, Record>,
 
     #[account(mut)]
@@ -19,7 +19,7 @@ impl Initialize<'_> {
         let record = &mut ctx.accounts.record;
         record.authority = *ctx.accounts.authority.key;
         record.identifier = identifier;
-        record.entries = entries;
+        record.entries = entries as u16;
         record.bump = *ctx
             .bumps
             .get("record")

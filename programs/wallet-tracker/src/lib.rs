@@ -1,3 +1,5 @@
+#![allow(clippy::result_large_err)]
+
 use anchor_lang::prelude::*;
 
 pub mod instructions;
@@ -18,6 +20,10 @@ pub mod wallet_tracker {
 
     pub fn close(_ctx: Context<Close>) -> Result<()> {
         Ok(())
+    }
+
+    pub fn claim_win_proof(ctx: Context<ClaimWinProof>, leaf_id: [u8; 32]) -> Result<()> {
+        ClaimWinProof::handler(ctx, leaf_id)
     }
 }
 
